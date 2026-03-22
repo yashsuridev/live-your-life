@@ -1,260 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" media="screen and (max-width:850px)" href="css/phone.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Website</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+    body{line-height:1.6}
 
-        /* body{
-            background-image: url(b.jpg);
-            background-repeat: no-repeat;
-            background-size: 100vw;
-        } */
-        #navbar {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+    header{
+      background:#333;
+      color:#fff;
+      padding:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
 
-        #logo img {
-            position: relative;
-            top: -12px;
-            border-radius: 10px;
-            height: 90px;
-            width: 111px;
-            margin: 24px 29px;
-        }
+    header h1{font-size:24px}
+    nav a{
+      color:#fff;
+      margin:0 10px;
+      text-decoration:none;
+      position:relative;
+      transition:0.3s;
+    }
 
-        #navbar ul {
-            display: flex;
-            height: 53px;
-        }
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-5px;
+      width:0%;
+      height:2px;
+      background:#fff;
+      transition:0.3s;
+      opacity:0.7;
+    }
 
-        #navbar::before {
-            content: "";
-            position: absolute;
-            top: 10px;
-            background-color: black;
-            height: 66%;
-            width: 100%;
-            z-index: -1;
-            opacity: 0.57;
-        }
+    nav a:hover::after{width:100%}
+    nav a:hover{opacity:0.8}
 
-        #navbar ul li {
-            list-style: none;
-            font-size: 1.3rem;
-        }
+    .hero{
+      height:90vh;
+      background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      text-align:center;
+      position:relative;
+      animation:fadeIn 2s ease-in-out;
+    }
 
-        #navbar ul li a {
-            text-decoration: none;
-            color: black;
-            margin: 12px;
-            padding: 15px;
-            background-color: aqua;
-            border-radius: 10px;
-        }
+    .hero::before{
+      content:"";
+      position:absolute;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.5);
+      z-index:1;
+    }
 
-        #navbar ul li a:hover {
-            color: rgb(0, 27, 231);
-            /* display: block; */
-            padding: 13px 15px;
-            margin: 25px;
-        }
+    .hero h2{font-size:40px;position:relative;z-index:2;animation:slideDown 1.5s}
 
-        #home {
-            height: 477px;
-            display: flex;
-            flex-direction: column;
-            padding: 2px 200px;
-            justify-content: center;
-            align-items: center;
-        }
+    section{padding:50px 20px}
 
-        #home::before {
-            content: "";
-            position: absolute;
-            background: url(b.jpg);
-            height: 70%;
-            width: 100%;
-            z-index: -1;
-            background-repeat: no-repeat;
-            background-size: 100vw;
-            opacity: 0.99;
-        }
+    .places{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
 
-        #home h1 {
-            font-size: 2rem;
-            margin: 7px;
-            color: #ff0078;
-            font-family: cursive;
-        }
+    .card{
+      border:1px solid #ddd;
+      border-radius:10px;
+      overflow:hidden;
+      position:relative;
+      transition:0.3s;
+      animation:zoomIn 1s;
+    }
 
-        #home p {
-            border-radius: 25px;
-            background-color: white;
-            color: rgb(182, 80, 80);
-            font-size: 18px;
-            padding: 6px;
-            margin: -7px;
-            font-family: cursive;
-        }
+    .card img{width:100%;height:200px;object-fit:cover}
 
-        .btn {
-            margin: 12px;
-            padding: 10px;
-            background-color: white;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            font-size: 1.2rem;
-            border: 5px solid black;
-            border-radius: 12px;
-            font-weight: bolder;
-        }
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.4);
+      opacity:0;
+      transition:0.3s;
+    }
 
-        .btn:hover {
-            color: blueviolet;
-            cursor: pointer;
-            padding: 12px;
-            margin: 9px;
-        }
+    .card:hover::before{opacity:1}
 
-        .h1-primary {
-            text-align: center;
-            font-size: 3.8rem;
-            padding: 12px;
-        }
+    .card h3{
+      padding:10px;
+      position:relative;
+      z-index:2;
+      transition:0.3s;
+    }
 
-        .h2-secondary {
-            text-align: center;
-            font-size: 2.5rem;
-            padding: 10px;
-        }
+    .card:hover h3{color:#fff}
 
-        #service {
-            display: flex;
-            margin: 30px;
-        }
+    .trainers,.plans{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+    }
 
-        #service .box {
-            padding: 10px;
-            margin: 5px;
-            border: 2px solid rgb(254, 0, 0);
-            border-radius: 10px;
-            /* background-color: rgb(247, 230, 230); */
-        }
+    .box{
+      border:1px solid #ddd;
+      padding:20px;
+      border-radius:10px;
+      width:250px;
+      text-align:center;
+      transition:0.3s;
+      animation:fadeUp 1s;
+    }
 
-        #service .box img {
-            height: 160px;
-            display: block;
-            margin: auto;
+    .box:hover{
+      transform:translateY(-10px);
+      background:#333;
+      color:#fff;
+      opacity:0.9;
+    }
 
-        }
+    .box button{
+      margin-top:10px;
+      padding:10px;
+      border:none;
+      background:#333;
+      color:#fff;
+      cursor:pointer;
+    }
 
-        #service-container {
-            height: 400px;
-        }
+    footer{
+      background:#333;
+      color:#fff;
+      text-align:center;
+      padding:10px;
+    }
 
-        .client {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    /* Animations */
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
 
-        .client img {
-            height: 60px;
-        }
+    @keyframes slideDown{
+      from{transform:translateY(-50px);opacity:0}
+      to{transform:translateY(0);opacity:1}
+    }
 
-        #client-section::before {
-            content: "";
-            position: absolute;
-            background: url(bb.jpg);
-            background-size: 100vw;
-            height: 30%;
-            width: 100%;
-            z-index: -1;
-            opacity: 0.5;
-        }
+    @keyframes zoomIn{
+      from{transform:scale(0.9);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
 
-        #contact {
-            position: relative;
-            margin: 52px;
-        }
+    @keyframes fadeUp{
+      from{transform:translateY(30px);opacity:0}
+      to{transform:translateY(0);opacity:1}
+    }
 
-        #contact h3 {
-            text-decoration: underline;
-        }
-    </style>
+    @media(max-width:600px){
+      .hero h2{font-size:28px}
+    }
+  </style>
 </head>
-
 <body>
-    <nav id="navbar">
-        <div id="logo">
-            <img src="logo.jpg" alt="error">
-        </div>
-        <ul>
-            <li class="items"><a href="#">Home</a></li>
-            <li class="items"><a href="#">Service</a></li>
-            <li class="items"><a href="#">About us</a></li>
-            <li class="items"><a href="#">Contact us</a></li>
-        </ul>
-    </nav>
-    <section id="home">
-        <h1>Have a World Tour with your partner</h1>
-        <p> The chance to discover new cultures, broaden your mind, create unforgettable memories, find fulfillment, and
-            experience personal growth by stepping outside your comfort zone. Travel offers unique experiences, such as
-            seeing new places for the first time, and allows for deep self-discovery, making it a worthwhile endeavor
-            for those seeking a richer, more adventurous life</p>
-        <button class="btn">Book your ticket Now</button>
-    </section>
-    <section class="service-container">
-        <h1 class="h1-primary">Our Services</h1>
-        <div id="service">
-            <div class="box">
-                <img src="mo.jpeg" alt="error">
-                <h2 class="h2-secondary">Ouray</h2>
-                <p class="center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt molestiae, facilis
-                    rem fugiat provident placeat nihil. Nesciunt minus ratione quos?</p>
-            </div>
-            <div class="box">
-                <img src="partner.jpg" alt="error">
-                <h2 class="h2-secondary">Paris</h2>
-                <p class="center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt molestiae, facilis
-                    rem fugiat provident placeat nihil. Nesciunt minus ratione quos?</p>
-            </div>
-            <div class="box">
-                <img src="boat.jpg" alt="error">
-                <h2 class="h2-secondary">Venice</h2>
-                <p class="center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt molestiae, facilis
-                    rem fugiat provident placeat nihil. Nesciunt minus ratione quos?</p>
-            </div>
-        </div>
-    </section>
-    <section id="client-section">
-        <h1 class="h1-primary"> Our Clients</h1>
-        <div class="client">
-            <div class="client-item">
-                <img src="clt logo 1.png" alt="">
-            </div>
-            <div class="client-item">
-                <img src="cl2.png" alt="">
-            </div>
-            <div class="client-item">
-                <img src="cl3.jpg" alt="">
-            </div>
-        </div>
-    </section>
-    <section id="contact">
-        <h3 class="h1-primary">Contact Us</h3>
-        <div class="detail"></div>
-        <h3 class="h1-primary">Build for loved ones</h3>
-    </section>
-</body>
 
+<header>
+  <h1>Travel World</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#places">Places</a>
+    <a href="#trainers">Guides</a>
+    <a href="#plans">Plans</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h2>Explore The World With Us</h2>
+</section>
+
+<section id="places">
+  <h2 style="text-align:center">Popular Destinations</h2>
+  <div class="places">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9">
+      <h3>Venice</h3>
+      <h5> Explore The Historic Architecture and Landmarks</h5>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34">
+      <h3>Paris</h3>
+      <h5>The City of Light" or "City of Love"</h5>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad">
+      <h3>Maldives</h3>
+      <h5>Luxurious Overwater Bungalows</h5>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c">
+      <h3>Dubai</h3>
+      <h5>The Most Populous City In The UAE</h5>
+    </div>
+  </div>
+</section>
+
+<section id="trainers">
+  <h2 style="text-align:center">Our Travel Guides</h2>
+  <div class="trainers">
+    <div class="box">
+      <h3>Mr Yash Suri</h3>
+      <p>Expert in Europe Tours</p>
+    </div>
+
+    <div class="box">
+      <h3>Gautam Yadav</h3>
+      <p>Beach Specialist</p>
+    </div>
+
+    <div class="box">
+      <h3>John Dsouza</h3>
+      <p>Adventure Trips</p>
+    </div>
+  </div>
+</section>
+
+<section id="plans">
+  <h2 style="text-align:center">Membership Plans</h2>
+  <div class="plans">
+    <div class="box">
+      <h3>Basic</h3>
+      <p>₹1</p>
+      <p>2 Trips / Year</p>
+      <button onclick="alert('Purchased Basic Plan')">Buy</button>
+    </div>
+
+    <div class="box">
+      <h3>Standard</h3>
+      <p>₹9</p>
+      <p>5 Trips / Year</p>
+      <button onclick="alert('Purchased Standard Plan')">Buy</button>
+    </div>
+
+    <div class="box">
+      <h3>Premium</h3>
+      <p>₹19</p>
+      <p>Unlimited Trips</p>
+      <button onclick="alert('Purchased Premium Plan')">Buy</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Travel World</p>
+  <h1>BUILD FOR LOVED ONES</h1>
+</footer>
+
+</body>
 </html>
